@@ -2,16 +2,27 @@
 /***Events */
 document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault()
-    //grab input img
+
+    //handl the inputs information and add them to the menu
+    const newName = document.querySelector("#new-name")
+    const newRestaurant = document.querySelector("#new-restaurant")
     const img = document.querySelector("#new-image")
-    //grab the div where the images are
-    const ramenMenuContainer = document.querySelector('#ramen-menu')
-    //create a new image element
-    const newImage = document.createElement('img')
-    //add the value of the image input to the img src
-    newImage.src = img.value
-    //append new image to the ramen menu container
-    ramenMenuContainer.appendChild(newImage)
+    const newRating = document.querySelector("#new-rating")
+    const newComment = document.querySelector("#new-comment")
+    let newRamenDetails ={
+        name: newName.value,
+        restaurant: newRestaurant.value,
+        image: img.value,
+        rating: newRating.value,
+        comment: newComment.value
+    }
+    displayRamen(newRamenDetails)
+    newName.value = ''
+    newRestaurant.value = ''
+    img.value = ''
+    newRating.value = ''
+    newComment.value = ''
+
 })
 /***Render to DOM */
 const displayRamen = ({id, name, restaurant, image, rating, comment}) => {
@@ -24,7 +35,7 @@ const displayRamen = ({id, name, restaurant, image, rating, comment}) => {
         const ramenDetailContainer = document.querySelector('#ramen-detail')
         const imgDetail = document.querySelector("#ramen-detail > img")
         const ramenName = document.querySelector("#ramen-detail > h2")
-        const ramenRestaurant = document.querySelector("#ramen-detail > h2")
+        const ramenRestaurant = document.querySelector("#ramen-detail > h3")
         const ramenRatings = document.querySelector("#rating-display")
         const ramenComments = document.querySelector("#comment-display")
         imgDetail.src = image
